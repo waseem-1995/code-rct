@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+    <style>
+        #slide_images{
+            text-align: center;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        #slide_images img{
+            width: 100%;
+            height: 500px;
+        }
+        #movies{
+            display:inline-grid;
+            grid-template-columns: 33% 33% 33%;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+            gap: 20px;
+           
+        }
+        #movies div{
+            display: grid;
+            justify-items: center;
+            margin-bottom: 10px;
+            margin: auto;
+           
+        }
+    
+    </style>
+    
+</head>
+<body>
+    <h1>hotsar</h1>
+    <div id="slide_images"></div>
+
+    <div>
+        <input type="text" id="query">
+        <button onclick="searchMovies()">search movies</button>
+    </div>
+   
+    <div id="movies"> </div>
+
+   
+</body>
+</html>
+<script src="search.js"></script>

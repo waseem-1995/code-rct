@@ -1,0 +1,24 @@
+{
+  "Todos": [
+    {
+      "id": "d263a0a1-c21c-4037-970a-28eb340ff8af",
+      "Task": "Buy book",
+      "status": true
+    },
+    {
+      "id": "d99ce920-45d9-4258-8816-d53eff0115b3",
+      "Task": "Buy Pen",
+      "status": true
+    },
+    {
+      "id": "64e68e6b-ac50-4505-a9a7-ee3da8f55b17",
+      "Task": "Buy exercisebook",
+      "status": false
+    },
+    {
+      "id": "25f6322d-0783-48d3-ac42-d9cc44e33cf4",
+      "Task": "waseem",
+      "status": true
+    }
+  ]
+}

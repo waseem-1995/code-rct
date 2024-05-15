@@ -1,0 +1,12 @@
+#main_items{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+#navbar{
+    display: flex;
+    height: 50px;
+    width: 300px;
+    justify-content: space-between;
+    background-color: aquamarine;
+    
+}

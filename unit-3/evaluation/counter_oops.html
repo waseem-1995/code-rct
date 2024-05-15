@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+</head>
+<body>
+    <h1>Counter</h1>
+    <h1 id="counter"></h1>
+    <button id="add_btn">increment</button>
+    <button id="dec">decrement</button>
+</body>
+</html>
+<script>
+
+class counter{
+    #value;
+    constructor(int_value){
+        this.value=int_value;
+    }
+
+    set value(new_value){
+        this.#value=new_value;
+    }
+    get value(){
+        return this.#value;
+    }
+}
+
+let c=new counter(0);
+
+let increment=()=>{
+    c.value++;
+    let v=document.getElementById("counter")
+    v.innerText=c.value;
+
+}
+
+let decrement=()=>{
+    c.value--;
+    let v=document.getElementById("counter")
+    v.innerText=c.value;
+
+}
+window.onload=()=>{
+
+    let v=document.getElementById("counter")
+    v.innerText=c.value;
+    const btn=document.getElementById("add_btn")
+    btn.onclick=()=>{
+        increment();
+    }
+    let b=document.getElementById("dec")
+    b.onclick=()=>{
+        decrement();
+    }
+}
+
+</script>

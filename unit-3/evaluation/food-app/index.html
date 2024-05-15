@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <title>Home</title>
+    <style>
+
+
+
+    </style>
+</head>
+
+<body>
+
+
+
+    <div id="navbar"></div>
+    <div id="receipeDiv"></div>
+
+
+
+    <script type="module">
+        /* 
+            Problem
+            Create a food app which will allow user to search receipe by name, get receipe of the day and show latest receipe.
+            Use https://www.themealdb.com/api.php?ref=apilist.fun as your API.
+            Create a navbar for easy navigation, it should be visible on all pages.
+            You will have to build three pages as mentioned above.
+            For this problem, start by building a search page.
+            Bonus: Implement debouncing while you are searching for meals in real-time.
+            Use components to make your code reusable.
+            Mandatory: ES6 and using components
+        */
+
+
+        import navbar from "./components/navbar.js";
+        import { getSearchedReceipe } from "./scripts/getReceipe.js";
+        import { displaySearchedReceipe } from "./scripts/displayData.js";
+
+        // navbar
+        document.getElementById('navbar').innerHTML = navbar();
+
+
+        // document.getElementById('search').addEventListener('input', () => {
+
+
+
+        // })
+
+        function main() {
+            let searchReceipe = document.getElementById('search').value;
+
+            if (searchReceipe.length < 3) {
+                return false;
+            }
+
+            // Getting search string and fetching through api
+            getSearchedReceipe(searchReceipe)
+                .then(({ meals }) => {
+
+                    if (meals != null) {
+                        displaySearchedReceipe(meals);
+                    }
+                })
+                .catch((err) => {
+                    console.log("Err: ", err);
+                })
+        }
+
+
+        let timer;
+        document.getElementById('search').addEventListener('input', () => {
+
+            debounce(main, 1000);
+
+        })
+
+
+        function debounce(main, delay) {
+            if (timer) {
+                clearInterval(timer);
+            }
+
+            timer = setTimeout(() => {
+                main();
+            }, delay)
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

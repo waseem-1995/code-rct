@@ -1,0 +1,48 @@
+.addPostWrapper {
+  min-height: fit-content;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: auto;
+  background-color: white;
+  box-shadow: 10px 10px 6px 1px rgba(239, 241, 243, 1);
+  text-align: center;
+}
+
+.addPostTextArea {
+  background-color: #f3f8fb;
+  border: none;
+  max-width: 90%;
+  margin: 20px auto 8px;
+  padding: 10px;
+  font-size: 20px;
+  height: 80%;
+  resize: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.addPostTextArea::placeholder {
+  color: #c3c7cc;
+}
+
+.addPostBtnWrapper {
+  padding: 0px 15px;
+  margin: auto;
+  display: flex;
+  justify-content: right;
+}
+
+.addPostBtn {
+  background-color: #03a9f5;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.addPostBtn:hover {
+  background-color: #039de4;
+}

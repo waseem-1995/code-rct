@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>footbal</title>
+    <style>
+          #query{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #000438;
+            color: aliceblue;
+            font-size: 25px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+        input{
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #container{
+           display:grid;
+           grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+       }
+       .card{
+        padding: 10px;
+        border:2px solid rgb(23, 2, 60);
+        background-color: rgb(134, 255, 109);
+        color: #2c0069;
+        border-radius: 10px;
+
+       }
+       #pagination{
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+       }
+        button{
+        width: 120px;
+        height: 40px;
+        cursor: pointer;
+        background-color: #db5c53;
+        font-size: 17px;
+        color: #fff;
+       }
+       select{
+        width: 130px;
+        height: 40px;
+        font-size: 18px;
+        border-radius: 5px;
+       }
+    </style>
+</head>
+<body>
+    <div id="query">
+        <label for="team1">select team1</label>
+        <select name="team1" id="team1">
+            <option value="Barcelona">Barcelona</option>
+            <option value="AC Milan">AC Milan</option>
+            <option value="Borssia Dortmund">Borssia Dortmund</option>
+        </select>
+
+        <label for="team2">select team2</label>
+        <select name="team2" id="team2">
+            <option value="Barcelona">Barcelona</option>
+            <option value="AC Milan">AC Milan</option>
+            <option value="Borssia Dortmund">Borssia Dortmund</option>
+        </select>
+
+        <label for="year"></label>
+        <select name="year" id="year">
+            <option value="">year</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+        </select>
+        <button onclick="search()">search</button>     
+    </div>
+    <div id="pagination">
+        <button onclick="previous()">&#60 &#60 Previous</button>
+        <button onclick="next()">Next &#62 &#62 </button>
+    </div>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    const url="https://jsonmock.hackerrank.com/api/football_matches"
+
+let page=1;
+
+let getData=async(p)=>{
+    try{
+        let res=await fetch(`${url}?page=${p}`);
+        data=await res.json();
+        //console.log(data)
+        renderDom(data.data)
+    }catch(error){
+        console.log(error)
+    }
+}
+getData(page)
+
+let el=(tag)=>{
+    return document.createElement(tag);
+}
+
+let matchCard=({competition,team1,team2,year})=>{
+    let div=el("div");
+    div.setAttribute("class","card");
+    let comp=el("h3")
+    comp.innerText=competition;
+    let t1=el("p");
+    t1.innerText=team1;
+    let t2=el("p");
+    t2.innerText=team2;
+    let y=el("p");
+    y.innerText=year;
+
+    div.append(comp,t1,t2,y);
+    return div
+};
+
+
+let renderDom=(data)=>{
+    let cont= document.getElementById("container")
+    cont.innerHTML=null;
+    data.forEach((el) => {
+        let card=matchCard(el);
+        cont.append(card)
+    });
+};
+
+let previous=()=>{
+    if(page===1){
+        return
+    }
+    page--;
+    getData(page)
+}
+
+let next=()=>{
+    if(page===1159){
+        return
+    }
+    page++;
+    getData(page)
+};
+
+let search=async()=>{
+    let team1=document.getElementById("team1").value;
+    let team2=document.getElementById("team2").value;
+    let year=document.getElementById("year").value;
+
+    let u=`${url}?`;
+
+  if(team1){
+    u=u+`team1=${team1}`;
+  }
+  if(team2){
+    u=u+`&team2=${team2}`;
+  }
+  if(year){
+    u=u+`&year=${year}`;
+  }
+  //let u=`${url}?team1=${team1}&team2=${team2}&year=${year}`
+  try{
+    let res =await fetch(u);
+    data=await res.json();
+    console.log(data.data)
+    renderDom(data.data)
+  }catch(error){
+    console.log(error)
+  }
+
+};
+
+</script>

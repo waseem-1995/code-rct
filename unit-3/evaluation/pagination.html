@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pagination</title>
+</head>
+<body>
+  <div id="container"></div>
+  <div id="buttons"></div>
+</body>
+</html>
+<script>
+const url="https://jsonplaceholder.typicode.com/comments"
+let data=[];
+let getData=async ()=>{
+    try{
+     let res=await fetch(url);
+     res=await res.json();
+     return res
+    }catch(error){
+      console.log(error)
+    }
+}
+
+let main=async ()=>{
+  data=await getData();
+  rendorDom(1)
+  showbuttons(1);
+  console.log(data)
+};
+main()
+
+let rendorDom=(page)=>{
+  let container=document.getElementById("container")
+    container.innerHTML=null
+
+    let start=10*(page-1);
+    let end=start+19;
+
+    let per_page_data=data.slice(start,end);
+    per_page_data.forEach(({id,name})=>{
+      let p=document.createElement("p");
+      p.innerText=`${id} ${name}`;
+
+      container.append(p);
+    })
+};
+
+let showbuttons=(page)=>{
+  let btn=document.getElementById("buttons");
+    btn.innerHTML=null;
+    let start=1;
+    if(page>6){
+        start=page-5
+    }
+    for(let i=start;i<=start+18;i++){
+      let b=document.createElement("button")
+      b.innerText=i;
+      b.onclick=()=>{
+        rendorDom(i);
+        showbuttons(i)
+      }
+        btn.append(b);
+    }
+}
+
+const btn = document.getElementById('button');
+
+buttons.addEventListener('click', function onClick() {
+  btn.style.backgroundColor = 'salmon';
+  btn.style.color = 'white';
+});
+
+
+</script>

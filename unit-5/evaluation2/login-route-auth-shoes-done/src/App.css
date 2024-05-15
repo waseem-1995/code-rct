@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+.shoes-main-div {
+  display: grid;
+  grid-template-columns: repeat(3,380px);
+  /* grid-template-rows: repeat(5,400px); */
+  justify-content: center;
+  gap: 6px;
+}

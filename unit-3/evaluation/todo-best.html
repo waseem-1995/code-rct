@@ -1,0 +1,198 @@
+<!-- 
+    Problem
+    This is an extension of the above problem.
+    Once a user is able to add a new task using the input box, submit it and see it on the webpage, start working on the below functionalities.
+    For each task, there should be two buttons, ‘Done’ and ‘Remove’
+    If you click on ‘Done’, the task will be shown in green color and the text will have a strikethrough CSS property.
+    If you click on ‘Remove’, the task along with both the buttons will be removed from DOM.
+    on the top right corner, show the total number of tasks at any given time. If a task is removed, the number should also be decreased by 1. If added, the number should get increased by 1.    
+ -->
+
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Toggle Status Of Task</title>
+    <style>
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }        
+
+        .container {
+            border: 1px solid whitesmoke;
+            width: 70%;
+
+            margin: auto;
+            padding: 3%;
+
+            text-align: center;
+        }
+
+        
+
+        li {
+            /* text-decoration: none; */
+            list-style-type: none;
+            padding: 1%;
+
+            display: grid;
+            grid-template-columns: 50% auto auto auto;
+            gap: 3%;
+
+        }
+
+        #name {
+            width: 20em;
+            height: 3em;
+            background-color: white;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        #allTasks{
+            background-color: beige;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <!-- Html form -->
+        <form action="">
+            <label for="name">TO DO </label>
+            <input type="text" id="name" name="name" placeholder="Enter your To Do here">
+
+            <button type="submit" onclick="addTask(event)" id="submitBtn" value="submit">SUBMIT</button>
+            <!-- <button id="toggleTask" value="toggle">Toggle Task</button> -->
+        </form>
+
+        <!-- Div where all tasks will be appended -->
+        <div id="allTasks"></div>
+    </div>
+
+
+
+    <script>
+
+        // array for all tasks
+        var AllTasks = new Array();
+        let taskCounter = 0;
+        // console.log(taskCounter);
+
+
+        // Constructor function
+        // With default value of status is false
+        function Task(id, name, status = false) {
+            this.id = id,
+            this.name = name,
+            this.date = new Date().getDay() + "/" + new Date().getMonth() + "/" + new Date().getFullYear(),
+            this.status = status
+        }
+
+
+        let list = document.createElement("ul");
+        let allTasks = document.getElementById("allTasks");
+        
+        function addTask(e){
+            
+            e.preventDefault();
+
+            let name = document.getElementById("name").value;
+                // new object created named: task
+            AllTasks[taskCounter] = new Task(taskCounter, name);
+            // console.log(AllTasks);
+            // console.log(taskCounter);
+
+            let li =  document.createElement("li");
+                li.setAttribute("id", taskCounter);
+                li.innerHTML = "<h3>"+((taskCounter+1)+" "+AllTasks[taskCounter].name+" "+AllTasks[taskCounter].date+" "+AllTasks[taskCounter].status)+"</h3>";
+
+            // Toggle task button created
+            let toggleTaskBtn = document.createElement("button");
+                toggleTaskBtn.innerText = "Toggle Task";
+                toggleTaskBtn.addEventListener('click', function (){                            
+                    // console.log(li.innerText[0]);
+                    // console.log(AllTasks[li.innerText[0]-1]);
+
+                    // grabbing task number of the task
+                    let taskNumber = li.innerText[0]-1;
+
+                    toggleTask(taskNumber, li, toggleTaskBtn, doneBtn, removeBtn);
+
+                    // console.log(AllTasks);                                
+                });
+
+            
+            // Done Button
+            let doneBtn = document.createElement("button");
+                doneBtn.innerText = "Done";
+                doneBtn.addEventListener('click', function(){
+                    li.setAttribute('style','background-color: lightgreen;');
+                })
+
+            // Remove task button
+            let removeBtn = document.createElement("button");
+                removeBtn.innerText = "Remove"
+                removeBtn.addEventListener('click', function(){
+                    let taskNumber = li.innerText[0]-1;
+                    // console.log(AllTasks[taskNumber]);
+                    delete AllTasks[taskNumber];
+                    document.getElementById(taskNumber).remove();
+
+                    // console.log(AllTasks);
+                })
+
+
+            li.append(toggleTaskBtn, doneBtn, removeBtn);
+            list.append(li);
+
+            allTasks.append(list);
+
+            // increment counter
+            taskCounter++;            
+        }
+
+
+
+        function toggleTask(taskNumber, li, toggleTaskBtn, doneBtn, removeBtn){
+            // current object true/flase toggling
+            if(AllTasks[taskNumber].status == false){
+                AllTasks[taskNumber].status = true;
+
+                let li = document.getElementById(taskNumber);
+                    li.innerHTML = "<h3>"+((taskNumber+1)+" "+AllTasks[taskNumber].name+" "+AllTasks[taskNumber].date+" "+AllTasks[taskNumber].status)+"</h3>";
+                    li.append(toggleTaskBtn, doneBtn, removeBtn);
+            }else{
+                AllTasks[taskNumber].status = false;
+
+                let li = document.getElementById(taskNumber);
+                    li.innerHTML = "<h3>"+((taskNumber+1)+" "+AllTasks[taskNumber].name+" "+AllTasks[taskNumber].date+" "+AllTasks[taskNumber].status)+"</h3>";
+                    li.append(toggleTaskBtn, doneBtn, removeBtn);
+            }
+
+            // console.log(AllTasks);
+        }
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "d1ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc src/1.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

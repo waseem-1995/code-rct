@@ -1,0 +1,14 @@
+{
+  "products": [
+    
+    {
+      "image": "https://cdn.pixabay.com/photo/2014/09/03/20/15/shoes-434918_960_720.jpg",
+      "title": "aa",
+      "price": "1200",
+      "brand": "hh",
+      "discount": "12",
+      "gender": "male",
+      "id": 2
+    }
+  ]
+}

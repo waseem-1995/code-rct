@@ -1,0 +1,19 @@
+{
+  "countries": [
+    {
+      "id": 1,
+      "name": "India",
+      "capital": "Delhi"
+    },
+    {
+      "id": 2,
+      "name": "USA",
+      "capital": "Washington DC"
+    },
+    {
+      "name": "Bangladesh",
+      "capital": "dhaka",
+      "id": 3
+    }
+  ]
+}
